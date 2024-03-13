@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import moment from 'moment';
 import ReactSpeedometer from "react-d3-speedometer";
+import Footer from "@/components/Footer";
 
 export default function Resources() {
     const [allResources, setAllResources] = useState([]);
@@ -81,7 +82,7 @@ export default function Resources() {
 
     return (
         <div className="h-screen w-screen text-blue-text">
-            <div className="flex flex-col gap-5 h-full w-full pb-56">
+            <div className="flex flex-col gap-5 pb-32">
                 <div><p className="text-4xl px-6 pt-24">Recursos</p></div>
                 {allResources.map((resource, index) =>
                     <motion.div
@@ -147,6 +148,7 @@ export default function Resources() {
                     </motion.div>
                 )}
             </div>
+            <Footer/>
         </div>
     );
 }
