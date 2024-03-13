@@ -1,6 +1,7 @@
 import { sumToQuantity } from "@/pages/services/resource";
 
 export default async function handler(req, res) {
+    3 + 5
     try {
         if (req.method === "POST") {
             const { name, quantity } = req.body; 
