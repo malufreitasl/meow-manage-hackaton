@@ -1,6 +1,6 @@
 const { MongoClient } = require('mongodb')
 
-const DEFAULT_DB_NAME = "voluntanow-project"
+const DEFAULT_DB_NAME = "MeowManage"
 const URL = process.env.MONGO_URL ?? "mongodb+srv://gabrielassnunes:E8W8vYjpETutKMOi@cluster0.xbtvzhp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 const PORT = process.env.PORT || 3000
 

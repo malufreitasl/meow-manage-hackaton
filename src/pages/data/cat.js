@@ -1,38 +1,38 @@
+const { ObjectId } = require('mongodb');
 const { getMongoCollection } = require('./mongodb')
 const collectionName = "cat"
-const { ObjectId } = require('mongodb');
 
 async function loadAllCats() {
     const collection = await getMongoCollection(collectionName);
-    const allCats = await collection.find({});
+    const allCats = await collection.find().toArray();
     return allCats;
 }
 
 async function loadCatInfo(id){
     const collection = await getMongoCollection(collectionName);
-    const allCats = await collection.findOne({id : id});
-    return allCats;
+    const catInfo = await collection.findOne({_id : new ObjectId(id)});
+    return catInfo;
 }
 
-async function updateAddoptedInfo(boolean, id) {
+async function updateAddoptedInfo(id) {
     const collection = await getMongoCollection(collectionName);
+    const currentCat = await collection.findOne({ _id: new ObjectId(id) });
+
+    if (!currentCat) {
+        throw new Error(`No cat found with id: ${id}`);
+    }
+
+    const newAdoptedValue = !currentCat.adopted;
+
     const updatedCat = await collection.updateOne(
-        { _id: id }, 
-        { $set: { adopted: boolean } } 
+        { _id: new ObjectId(id) }, 
+        { $set: { adopted: newAdoptedValue } } 
     );
+
     return updatedCat;
 }
 
-async function updateAddoptedInfo(boolean, id) {
-    const collection = await getMongoCollection(collectionName);
-    const updatedCat = await collection.updateOne(
-        { _id: id }, 
-        { $set: { adopted: boolean } } 
-    );
-    return updatedCat;
-}
-
-async function addCat(catInfo) {
+async function insertCat(catInfo) {
     const collection = await getMongoCollection(collectionName);
     const result = await collection.insertOne(
         {
@@ -40,17 +40,45 @@ async function addCat(catInfo) {
             age: catInfo.age,
             entry_date: new Date(),
             sex: catInfo.sex,
-            peso: 6,
+            weight: catInfo.weight,
             image: catInfo.image,
-            "adopted": "true",
-            "resource": {
-                food: 65,
+            adopted: false,
+            resource: {
+                food: catInfo.weight < 4? 40 : catInfo.weight < 6? 65 : 85,
                 water: 2,
-                "litter": 0.7
-              }
+                litter: 0.7
+            }
         }
     );
     return result.acknowledged;
 }
 
-module.exports = { loadAllCats, loadCatInfo, updateAddoptedInfo };
+async function sumResourceValues() {
+    const collection = await getMongoCollection(collectionName);
+    const aggregationResult = await collection.aggregate([
+        {
+            $group: {
+                _id: null,
+                totalFood: { $sum: "$resource.food" },
+                totalWater: { $sum: "$resource.water" },
+                totalLitter: { $sum: "$resource.litter" }
+            }
+        }
+    ]).toArray();
+
+    if (aggregationResult.length > 0) {
+        return {
+            totalFood: Math.floor(aggregationResult[0].totalFood),
+            totalWater: Math.floor(aggregationResult[0].totalWater),
+            totalLitter: Math.floor(aggregationResult[0].totalLitter)
+        };
+    } else {
+        return {
+            totalFood: 0,
+            totalWater: 0,
+            totalLitter: 0
+        };
+    }
+}
+
+module.exports = { loadAllCats, loadCatInfo, updateAddoptedInfo, insertCat, sumResourceValues };
