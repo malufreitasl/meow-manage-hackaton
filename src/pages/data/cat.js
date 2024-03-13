@@ -68,9 +68,9 @@ async function sumResourceValues() {
 
     if (aggregationResult.length > 0) {
         return {
-            totalFood: aggregationResult[0].totalFood,
-            totalWater: aggregationResult[0].totalWater,
-            totalLitter: aggregationResult[0].totalLitter
+            totalFood: Math.floor(aggregationResult[0].totalFood),
+            totalWater: Math.floor(aggregationResult[0].totalWater),
+            totalLitter: Math.floor(aggregationResult[0].totalLitter)
         };
     } else {
         return {

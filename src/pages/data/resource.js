@@ -8,7 +8,7 @@ async function loadAllResources() {
     return allResources;
 }
 
-async function updateResourceQuantity(name, sumQuantity, operation) {
+async function updateResourceQuantity(name, quantity, operation) {
     const collection = await getMongoCollection(collectionName);
     const currentResource = await collection.findOne({ name: name });
 
@@ -18,9 +18,9 @@ async function updateResourceQuantity(name, sumQuantity, operation) {
     
     let newQuantity;
     if (operation === 'sum') {
-        newQuantity = currentResource.quantity + sumQuantity;
+        newQuantity = currentResource.quantity +  Number(quantity);
     } else if (operation === 'subtract') {
-        newQuantity = currentResource.quantity - sumQuantity;
+        newQuantity = currentResource.quantity - Number(quantity);
         if(newQuantity < 0) {
             newQuantity = 0;
         }
@@ -30,7 +30,7 @@ async function updateResourceQuantity(name, sumQuantity, operation) {
 
     const result = await collection.updateOne(
         { name: name }, 
-        { $set: { quantity: newQuantity } } 
+        { $set: { quantity: newQuantity, last_update: new Date()} } 
     );
 
     return result;

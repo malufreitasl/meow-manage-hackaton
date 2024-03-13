@@ -8,7 +8,8 @@ module.exports = {
   theme: {
     colors: {
       "white-background": "#FAFAFA",
-      "black": "#000000"
+      "black": "#000000",
+      "zinc": "#EBABCE"
     },
     extend: {
       backgroundImage: {
