@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import moment from 'moment';
+import ReactSpeedometer from "react-d3-speedometer";
 
 export default function Resources() {
     const [allResources, setAllResources] = useState([]);
@@ -13,7 +14,6 @@ export default function Resources() {
                 throw new Error('Fail to fetch all resources data');
             }
             const data = await response.json();
-            console.log
             setAllResources(data);
         } catch (error) {
             console.error('Fail to fetch all resources data:', error);
@@ -80,9 +80,9 @@ export default function Resources() {
 
 
     return (
-        <div className="h-screen w-screen">
-            <div className="flex flex-col gap-7 h-screen w-screen justify-center items-center">
-                <div><p className="text-4xl">Recursos</p></div>
+        <div className="h-screen w-screen text-blue-text">
+            <div className="flex flex-col gap-5 h-full w-full pb-56">
+                <div><p className="text-4xl px-6 pt-24">Recursos</p></div>
                 {allResources.map((resource, index) =>
                     <motion.div
                         initial={{
@@ -100,23 +100,49 @@ export default function Resources() {
                         }}
                         key={index}
                     >
-                        <div className="flex flex-col bg-zinc py-4 px-5 rounded-lg w-80">
-                            <div className="text-black text-center text-lg font-bold">{resource.name}</div>
-                            <div className="flex justify-between">
-                                <div className="text-black">Qty: {resource.quantity} {resource.unity}</div>
+                        <div className={`flex flex-col py-4 px-4 rounded-lg mx-6 gap-5 justify-center ${resource.name === "Areia"? "bg-yellow-card": resource.name === "Água"? "bg-blue-card": "bg-pink-card"}`}>
+                            <div className="text-blue-text center text-lg font-bold">{resource.name}</div>
+                            <div className="flex justify-between items-center">
+                                <div className="text-5xl ">{resource.quantity} {resource.unity}</div>
+                                <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
+                                    <input type="number" id="quantity" name="quantity" className="rounded-full w-14 h-13 text-center text-sm " placeholder="quant"/>
+                                    <div className="flex flex-col gap-1">
+                                    <button className="bg-dark-blue text-white-background rounded-lg px-2" onClick={() => handleSum(resource.name, document.getElementById('quantity').value)}>Adicionar</button>
+                                    <button className="bg-dark-blue text-white-background rounded-lg px-2" onClick={() => handleSubtraction(resource.name, document.getElementById('quantity').value)}>Remover</button>
+                                    </div>
+                                </form>
                             </div>
-                            <div >Previsão: {resource.name === "Água" ?
-                                    ( resource.quantity / requiredQuantity.totalWater).toFixed(0) :
+                            <div className="flex flex-wrap gap-1">
+                                <div className="bg-white-background rounded-lg px-2 text-sm"> Previsão: {resource.name === "Água" ?
+                                    (resource.quantity / requiredQuantity.totalWater === 1 ? "1 dia restante" : `${(resource.quantity / requiredQuantity.totalWater).toFixed(0)} dias restantes`) :
                                     resource.name === "Areia" ?
-                                        ( resource.quantity / requiredQuantity.totalLitter).toFixed(0)  :
-                                        ( resource.quantity / requiredQuantity.totalFood).toFixed(0)} Dias restantes</div>
-                            <div className="text-sm">Gastos / Dia: {resource.name === "Água" ? requiredQuantity.totalWater : resource.name === "Areia" ? requiredQuantity.totalLitter : requiredQuantity.totalFood} {resource.unity}</div>
-                            <div className="text-xs">Data da última alteração {moment(resource.last_update).format('DD/MM/YYYY')}</div>
-                            <form onSubmit={(e) => e.preventDefault()} className="flex gap-2 justify-end pt-5">
-                                <input type="number" id="quantity" name="quantity" className="border rounded-lg w-10 h-8 text-center" />
-                                <button onClick={(e) => handleSum(resource.name, e.target.previousSibling.value)}>Adicionar</button>
-                                <button onClick={(e) => handleSubtraction(resource.name, e.target.previousSibling.previousSibling.value)}>Remover</button>
-                            </form>
+                                        (resource.quantity / requiredQuantity.totalLitter === 1 ? "1 dia restante" : `${(resource.quantity / requiredQuantity.totalLitter).toFixed(0)} dias restantes`) :
+                                        (resource.quantity / requiredQuantity.totalFood === 1 ? "1 dia restante" : `${(resource.quantity / requiredQuantity.totalFood).toFixed(0)} dias restantes`)
+                                }</div>
+                                <div className="bg-white-background rounded-lg px-2 text-sm">Gastos / Dia: {resource.name === "Água" ? requiredQuantity.totalWater : resource.name === "Areia" ? requiredQuantity.totalLitter : requiredQuantity.totalFood} {resource.unity}</div>
+                            </div>
+                            <div className="flex flex-col items-center justify-center pt-2">
+                                <ReactSpeedometer className=" self-center justify-self-center" 
+                                    value={resource.name === "Água" ?
+                                        (resource.quantity / requiredQuantity.totalWater).toFixed(0) :
+                                        resource.name === "Areia" ?
+                                            (resource.quantity / requiredQuantity.totalLitter).toFixed(0) :
+                                            (resource.quantity / requiredQuantity.totalFood).toFixed(0)
+                                        } 
+                                        maxValue={10} 
+                                        segments={5} 
+                                        height={125} 
+                                        width={200}
+                                        segmentColors={[
+                                            "#bf616a",
+                                            "#d08770",
+                                            "#ebcb8b",
+                                            "#57A773",
+                                            "#B5EF8A",
+                                          ]}
+                                        />
+                            </div>
+                            <div className="text-gray-text rounded-lg px-2 text-xs justify-self-end self-end">Data da última alteração: {moment(resource.last_update).format('DD/MM/YYYY HH:mm')}</div>
                         </div>
                     </motion.div>
                 )}

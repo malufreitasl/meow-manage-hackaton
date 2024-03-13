@@ -9,7 +9,13 @@ module.exports = {
     colors: {
       "white-background": "#FAFAFA",
       "black": "#000000",
-      "zinc": "#EBABCE"
+      "dark-blue": "#004156",
+      "blue-text": "#00344B",
+      "blue-card":"#C6EDFF",
+      "pink-card":"#FEEAEA",
+      "yellow-card":"#FFEFD1",
+      "light-blue": "#ECF3F8",
+      "gray-text": "#A0B1B4"
     },
     extend: {
       
