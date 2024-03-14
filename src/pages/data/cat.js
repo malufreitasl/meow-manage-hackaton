@@ -57,6 +57,11 @@ async function sumResourceValues() {
     const collection = await getMongoCollection(collectionName);
     const aggregationResult = await collection.aggregate([
         {
+            $match: {
+                adopted: false
+            }
+        },
+        {
             $group: {
                 _id: null,
                 totalFood: { $sum: "$resource.food" },
@@ -80,5 +85,6 @@ async function sumResourceValues() {
         };
     }
 }
+
 
 module.exports = { loadAllCats, loadCatInfo, updateAddoptedInfo, insertCat, sumResourceValues };
