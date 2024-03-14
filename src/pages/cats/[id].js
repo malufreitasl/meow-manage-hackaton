@@ -90,31 +90,31 @@ export default function catInfo() {
                 </div>
             </div>
 
-            <div className="bg-blue-card rounded-2xl h-auto mx-6">
+            <div className="bg-light-blue rounded-2xl h-auto mx-6 px-2">
 
                 <div className="flex justify-center items-center h-24 ">
                     <p className="text-blue-text text-3xl font-mediuml">{infoAboutCat?.name}</p>
                 </div>
 
                 <div className="flex flex-col">
-                    <div className="flex justify-center mx-2">
-                        <div className="bg-white-background text-black flex flex-col items-center rounded-2xl p-4 h-24 w-24">
-                            <p className="text-lg text-black">{infoAboutCat?.age}{infoAboutCat?.age == 1 ? " ano" : " anos"} </p>
-                            <p className="text-blue-text font-bold text-xl">Idade</p>
+                    <div className="flex justify-center gap-2 ">
+                        <div className="bg-white-background text-black flex flex-col items-center rounded-2xl p-4 h-22 w-24">
+                            <p className="text-blue-text font-bold text-xl">{infoAboutCat?.age}{infoAboutCat?.age == 1 ? " ano" : " anos"} </p>
+                            <p className="text-black">Idade</p>
                         </div>
-                        <div className="bg-white-background text-black flex flex-col items-center rounded-2xl mx-6 p-4 h-24 w-24">
-                            <p className="text-lg text-black">{infoAboutCat?.weight} Kg</p>
-                            <p className="text-blue-text font-bold text-xl">Peso</p>
+                        <div className="bg-white-background text-black flex flex-col items-center rounded-2xl p-4 h-22 w-24">
+                            <p className="text-blue-text font-bold text-xl">{infoAboutCat?.weight} Kg</p>
+                            <p className=" text-black l">Peso</p>
                         </div>
-                        <div className="bg-white-background   flex flex-col items-center rounded-2xl p-4 h-24 w-24">
+                        <div className="bg-white-background flex flex-col items-center rounded-2xl p-4 h-22 w-24">
 
 
-                            <p className="text-lg text-black">{infoAboutCat?.sex}</p>
-                            <p className="text-blue-text font-bold text-xl">Sexo</p>
+                            <p className="text-blue-text font-bold text-xl">{infoAboutCat?.sex}</p>
+                            <p className="text-black">Sexo</p>
                         </div>
                     </div>
 
-                    <div className="mx-2 py-4">
+                    <div className="mx-4 py-5">
                         <div className="pb-3">
                             <p className=" text-blue-text font-bold text-xl">Data de entrada: </p>
                             <p className=" text-lg text-black">{infoAboutCat?.entry_date}</p>
@@ -127,7 +127,7 @@ export default function catInfo() {
 
                         <div>
                             <p className=" text-blue-text font-bold text-xl">Necessidade de ração</p>
-                            <p className=" text-lg text-black">{infoAboutCat?.resource?.food} kg</p>
+                            <p className=" text-lg text-black">{infoAboutCat?.resource?.food} g</p>
                         </div>
 
                     </div>

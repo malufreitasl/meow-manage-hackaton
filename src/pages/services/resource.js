@@ -2,6 +2,11 @@ const { loadAllResources, loadResourceQuantity, updateResourceQuantity } = requi
 
 async function getAllResources() {
     const allResources = await loadAllResources();
+    //Carrega os gastos diarios
+    //PAra cada um dos recursos
+        //Se a ultima alteracao foi a moment - 24 horas 
+            //Remove o gasto diario do recurso
+            //Atualiza a ultima alteracao
     return allResources;
 }
 
