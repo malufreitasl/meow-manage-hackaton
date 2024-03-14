@@ -1,4 +1,4 @@
-import { Logo, MenuBar, Notification } from "./icons";
+import { Logo, MenuBar, Notification } from "./Icons";
 import Link from "next/link";
 import { useState} from 'react';
 

@@ -127,10 +127,10 @@ export default function Resources() {
                             <div className="flex flex-col items-center justify-center pt-2">
                                 <ReactSpeedometer className=" self-center justify-self-center" 
                                     value={resource.name === "Água" ?
-                                        (resource.quantity / requiredQuantity.totalWater).toFixed(0) :
+                                        Number(resource.quantity / requiredQuantity.totalWater).toFixed(0) :
                                         resource.name === "Areia" ?
-                                            (resource.quantity / requiredQuantity.totalLitter).toFixed(0) :
-                                            (resource.quantity / requiredQuantity.totalFood).toFixed(0)
+                                          Number(resource.quantity / requiredQuantity.totalLitter).toFixed(0) :
+                                          Number(resource.quantity / requiredQuantity.totalFood).toFixed(0)
                                         } 
                                         maxValue={10} 
                                         segments={5} 
