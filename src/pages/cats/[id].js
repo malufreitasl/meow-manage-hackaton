@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import NavBar from "@/components/NavBar";
+import Footer from "@/components/Footer";
 
 
 
@@ -21,7 +23,7 @@ export default function catInfo() {
                 const data = await response.json();
 
                 setButtonAdopted(data.adopted)
-                
+
                 setInfoAboutCat(data);
             } catch (error) {
                 console.error('Failed to fetch info about cat data:', error);
@@ -67,7 +69,8 @@ export default function catInfo() {
 
 
     return (
-        <div className={"h-screen w-screen"}>
+        <div className={"h-screen w-screen py-28"}>
+            <NavBar />
 
             <div className="flex text-blue-text text-3xl font-bold justify-center items-center ">
                 Sobre
@@ -135,8 +138,12 @@ export default function catInfo() {
 
             </div>
             <div className="flex items-center justify-center py-6">
-                {/* {buttonAdopted && } */}
-                <button className="flex items-center justify-center h-12 rounded-lg w-auto  bg-dark-blue text-white-background" onClick={adoptedMe} disabled={buttonAdopted}>{buttonAdopted? "Meow adotado!" : "Confirmar adoção"}</button>
+               
+                <button className="flex items-center justify-center h-12 rounded-lg w-64  bg-dark-blue text-white-background" onClick={adoptedMe} disabled={buttonAdopted}>{buttonAdopted ? "Meow adotado!" : "Confirmar adoção"}</button>
+            </div>
+
+            <div className="h-28">
+                <Footer />
             </div>
         </div>
 

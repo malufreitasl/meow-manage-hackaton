@@ -2,6 +2,8 @@ import { Inter } from "next/font/google";
 import Link from 'next/link';
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion"
+import Footer from "@/components/Footer";
+import NavBar from "@/components/NavBar";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,7 +32,8 @@ export default function Home() {
 
   return (
 
-    <div className={"h-screen w-screen "}>
+    <div className={"h-screen w-screen py-28"}>
+      <NavBar/>
       <p className="flex text-3xl  mx-6 font-bold text-blue-text pb-4 justify-center items-center ">Nossos gatos</p>
       <div className="flex flex-col gap-10 overflow-auto whitespace-nowrap no-scrollbar py-6 ">
         {allCats.map((elemento, index) =>
@@ -75,6 +78,9 @@ export default function Home() {
             </Link>
           </motion.div>
         )}
+      </div>
+      <div className="h-20">
+        <Footer/>
       </div>
     </div>
   );
