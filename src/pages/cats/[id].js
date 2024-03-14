@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 
-
-
 export default function catInfo() {
     const [infoAboutCat, setInfoAboutCat] = useState({})
     const [buttonAdopted, setButtonAdopted] = useState(true)
@@ -28,7 +26,6 @@ export default function catInfo() {
             } catch (error) {
                 console.error('Failed to fetch info about cat data:', error);
             }
-            console.log(infoAboutCat)
         };
 
         if (id) {
@@ -54,19 +51,14 @@ export default function catInfo() {
                 body: JSON.stringify({ id: id }),
             })
             const newResponse = await response.json();
-            console.log(newResponse)
-            console.log("--.-.-.-.-.-.-----------")
             if (newResponse) {
                 setButtonAdopted(true)
-                console.log("dentrooo--.-.-.-.-.-.-----------")
             }
         } catch (error) {
             setButtonAdopted(true)
             console.error('Failed to fetch cat adoption:', error);
         }
     }
-
-
 
     return (
         <div className={"h-screen w-screen py-28"}>
@@ -84,7 +76,7 @@ export default function catInfo() {
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                     }}
-                    className="flex flex-col items-center h-48 w-48 rounded-full bg-black  justify-center"
+                    className="flex flex-col items-center h-48 w-48 rounded-full bg-black justify-center"
                 >
 
                 </div>
@@ -133,12 +125,9 @@ export default function catInfo() {
                     </div>
 
                 </div>
-
-
-
             </div>
+
             <div className="flex items-center justify-center py-6">
-               
                 <button className="flex items-center justify-center h-12 rounded-lg w-64  bg-dark-blue text-white-background" onClick={adoptedMe} disabled={buttonAdopted}>{buttonAdopted ? "Meow adotado!" : "Confirmar adoção"}</button>
             </div>
 
@@ -146,8 +135,5 @@ export default function catInfo() {
                 <Footer />
             </div>
         </div>
-
-
-
     )
 }

@@ -1,3 +1,4 @@
+import BackButton from "@/components/BackButton";
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
 
@@ -8,10 +9,10 @@ export default function Tarefas() {
             <div>
                 <NavBar />
             </div>
-            <div>
-
-                <h1 className="flex text-3xl mx-6 font-bold text-blue-text items-center pb-7 ">Tarefas</h1>
-                <div className="mx-6 ">
+            <div className="px-6">
+                <BackButton/>
+                <h1 className="flex text-3xl pt-3 font-bold text-blue-text items-center pb-7 ">Tarefas</h1>
+                <div>
                     <div className="flex gap-4 text-blue-text text-lg pb-6">
                         <label for="date">Data:</label>
                         <input type="date" id="date" name="date" /><br />
