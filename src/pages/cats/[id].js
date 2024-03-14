@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
+import BackButton from "@/components/BackButton";
 
 export default function catInfo() {
     const [infoAboutCat, setInfoAboutCat] = useState({})
@@ -29,9 +30,7 @@ export default function catInfo() {
         };
 
         if (id) {
-
             fetchCatInfo();
-
         }
     }, [id]);
 
@@ -52,7 +51,7 @@ export default function catInfo() {
             })
             const newResponse = await response.json();
             if (newResponse) {
-                setButtonAdopted(true)
+                setButtonAdopted(!buttonAdopted)
             }
         } catch (error) {
             setButtonAdopted(true)
@@ -63,9 +62,8 @@ export default function catInfo() {
     return (
         <div className={"h-screen w-screen py-28"}>
             <NavBar />
-
-            <div className="flex text-blue-text text-3xl font-bold justify-center items-center ">
-                Sobre
+            <div className="mx-8">
+                <BackButton/>
             </div>
             <div className="flex flex-col items-center justify-center py-8 ">
 
@@ -85,7 +83,7 @@ export default function catInfo() {
             <div className="bg-light-blue rounded-2xl h-auto mx-6 px-2">
 
                 <div className="flex justify-center items-center h-24 ">
-                    <p className="text-blue-text text-3xl font-mediuml">{infoAboutCat?.name}</p>
+                    <p className="text-blue-text text-3xl font-bold">{infoAboutCat?.name}</p>
                 </div>
 
                 <div className="flex flex-col">
@@ -128,7 +126,7 @@ export default function catInfo() {
             </div>
 
             <div className="flex items-center justify-center py-6">
-                <button className="flex items-center justify-center h-12 rounded-lg w-64  bg-dark-blue text-white-background" onClick={adoptedMe} disabled={buttonAdopted}>{buttonAdopted ? "Meow adotado!" : "Confirmar adoção"}</button>
+                <button className="flex items-center justify-center h-12 rounded-lg w-64  bg-dark-blue text-white-background" onClick={adoptedMe}>{buttonAdopted ? "Meow adotado!" : "Confirmar adoção"}</button>
             </div>
 
             <div className="h-28">
