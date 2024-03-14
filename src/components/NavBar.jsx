@@ -29,7 +29,7 @@ function DropdownMenuIcon() {
         <button className="bg-white-background Z-50" onClick={toggleDropdown}><MenuBar/></button>
         {showDropdown && (
           <div className="flex flex-col absolute gap-6 items-center right-0 text-white h-44 w-32 mt-2 bg-footer rounded-lg border justify-center">
-            <Link href="./tarefas" className="block px-4 py-2">Tarefas</Link>
+            <Link href="./tasks" className="block px-4 py-2">Tarefas</Link>
               <Link href="#" className="block px-4 py-2">Login</Link>
     
           </div>

@@ -45,7 +45,7 @@ export default function Home() {
               delay: index * 0.15
             }}
           >
-            <Link href={`/cats/${elemento._id}`} className="flex px-6 " >
+            <Link href={`/cats/${elemento._id}`} className="flex px-6" >
               <div className="flex flex-col py-4 bg-light-blue h-96 w-full rounded-lg px-4">
                 <div
                   style={{
@@ -54,12 +54,12 @@ export default function Home() {
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
-                  className="flex h-44 "
+                  className="flex h-44 rounded-lg"
                 >
 
                 </div>
                <div className="flex flex-col gap-1 py-6">
-                  <div className="text-blue-text text-3xl font-medium mt-4 pb-4">{elemento.name}</div>
+                  <div className="text-blue-text text-3xl font-medium mt-3 pb-4">{elemento.name}</div>
                   <div className="flex gap-3">
                     <div className=" py-1 px-2.5 text-gray-text bg-white-background rounded-lg">{elemento.age} anos</div>
                     <div className=" py-1 px-2.5 text-gray-text bg-white-background rounded-lg">{elemento.weight} kg</div>
