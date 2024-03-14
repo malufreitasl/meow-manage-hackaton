@@ -1,11 +1,13 @@
 import Footer from '@/components/Footer'
 import Image from 'next/image'
 import { motion } from "framer-motion";
+import NavBar from '@/components/NavBar';
 
 export default function Resources() {
     return (
         <>
             <div className="w-screen h-screen text-blue-text">
+                <NavBar/>
                 <div className='flex flex-col items-center justify-center h-full'>
                     <motion.div
                           animate={{ y: [100, 0] }}

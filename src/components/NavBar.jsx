@@ -5,7 +5,7 @@ import { useState} from 'react';
 
 export default function NavBar() {
     return (
-        <div className="fixed top-0 left-0 w-full z-50 bg-opacity-80 bg-white-background">
+        <div className="fixed top-0 left-0 w-full z-50 bg-opacity-80 pb-4 bg-white-background">
             <div className="flex justify-between mx-6">
                 <Link href="/" className="pt-6"><Logo /></Link>
                 <div className="flex gap-4 pt-12 items-center">
@@ -29,7 +29,7 @@ function DropdownMenuIcon() {
         <button className="bg-white-background Z-50" onClick={toggleDropdown}><MenuBar/></button>
         {showDropdown && (
           <div className="flex flex-col absolute gap-6 items-center right-0 text-white h-44 w-32 mt-2 bg-footer bg-opacity-80 rounded-lg border justify-center">
-            <Link href="#" className="block px-4 py-2">Sobre Nós</Link>
+            <Link href="#" className="block px-4 py-2">Tarefas</Link>
               <Link href="#" className="block px-4 py-2">Login</Link>
     
           </div>
