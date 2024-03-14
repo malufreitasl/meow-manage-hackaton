@@ -1,14 +1,8 @@
-import { Raleway } from "next/font/google";
 import Link from 'next/link';
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion"
 import Footer from "@/components/Footer";
 import NavBar from "@/components/NavBar";
-
-
-const aleway = Raleway({ subsets: ["latin"] });
-
-
 
 export default function Home() {
   const [allCats, setAllCats] = useState([]);

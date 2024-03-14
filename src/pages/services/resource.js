@@ -1,12 +1,18 @@
 const { loadAllResources, loadResourceQuantity, updateResourceQuantity } = require("../data/resource");
+const { getResourcesSum } = require("./cat");
+import moment from 'moment';
 
 async function getAllResources() {
     const allResources = await loadAllResources();
-    //Carrega os gastos diarios
-    //PAra cada um dos recursos
-        //Se a ultima alteracao foi a moment - 24 horas 
-            //Remove o gasto diario do recurso
-            //Atualiza a ultima alteracao
+    const resourcesSum = await getResourcesSum();
+
+    allResources.forEach(e => {
+        if (moment().isAfter(moment(e.last_update).add(24, "hours"))) {
+            e.quantity -= resourcesSum[e.name];
+            e.last_update = moment();
+        }
+    });
+
     return allResources;
 }
 
